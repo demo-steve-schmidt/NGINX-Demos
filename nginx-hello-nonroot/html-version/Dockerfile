@@ -10,4 +10,8 @@ RUN chmod -R a+w /var/cache/nginx/ \
 COPY hello.conf /etc/nginx/conf.d/
 COPY index.html /usr/share/nginx/html/
 EXPOSE 8080
-USER nginx
+# NOTE: steve: non numberic users can cause trouble in Kubernetes
+# CreateContainerConfigError: Error: container has runAsNonRoot and 
+#   image has non-numeric user (username), cannot verify user is non-root.
+# USER nginx
+USER 1234
